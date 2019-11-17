@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import { formatPostDate } from "../utils/helpers"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -8,14 +9,24 @@ const BlogPosts = ({ data }) => {
   const blogPosts = data.allContentfulPost.edges
   return (
     <Layout>
-      <SEO title="Blog posts" />
+      <SEO title="Caroline" />
       <div className="blogposts">
         {blogPosts.map(({ node: post }) => (
-          <div key={post.id}>
-            <Link to={`/post/${post.slug}`}>{post.title}</Link>
-          </div>
+          <article key={post.id} style={{ marginBottom: 24 }}>
+            <header>
+              <h3
+                style={{
+                  fontSize: 20,
+                  marginBottom: `none`,
+                  textTransform: `capitalize`,
+                }}
+              >
+                <Link to={`post/${post.slug}`}>{post.title}</Link>
+              </h3>
+              <small>{formatPostDate(post.date)}</small>
+            </header>
+          </article>
         ))}
-        <span className="mgBtm__24" />
       </div>
     </Layout>
   )
@@ -31,6 +42,7 @@ export const query = graphql`
           id
           title
           slug
+          date
         }
       }
     }
