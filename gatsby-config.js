@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Coffee`,
+    description: `Caroline's website`,
+    author: `Caroline Sancken`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -25,6 +25,13 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `xnf5hs7xaawl`,
+        accessToken: `Vu47UVPI5gxjhq9kKWDJuP2MbhheBSgHqU960jrsqcY`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

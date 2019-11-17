@@ -1,21 +1,38 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const BlogPosts = ({ data }) => {
+  const blogPosts = data.allContentfulPost.edges
+  return (
+    <Layout>
+      <SEO title="Blog posts" />
+      <div className="blogposts">
+        {blogPosts.map(({ node: post }) => (
+          <div key={post.id}>
+            <Link to={`/post/${post.slug}`}>{post.title}</Link>
+          </div>
+        ))}
+        <span className="mgBtm__24" />
+      </div>
+    </Layout>
+  )
+}
 
-export default IndexPage
+export default BlogPosts
+
+export const query = graphql`
+  query BlogPostsPageQuery {
+    allContentfulPost(limit: 1000) {
+      edges {
+        node {
+          id
+          title
+          slug
+        }
+      }
+    }
+  }
+`
