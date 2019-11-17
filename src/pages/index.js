@@ -17,7 +17,7 @@ const BlogPosts = ({ data }) => {
               <h3
                 style={{
                   fontSize: 20,
-                  marginBottom: `none`,
+                  marginBottom: 0,
                   textTransform: `capitalize`,
                 }}
               >
