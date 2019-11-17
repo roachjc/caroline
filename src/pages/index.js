@@ -21,7 +21,12 @@ const BlogPosts = ({ data }) => {
                   textTransform: `capitalize`,
                 }}
               >
-                <Link to={`post/${post.slug}`}>{post.title}</Link>
+                <Link
+                  style={{ textDecoration: `none` }}
+                  to={`post/${post.slug}`}
+                >
+                  {post.title}
+                </Link>
               </h3>
               <small>{formatPostDate(post.date)}</small>
             </header>
@@ -36,7 +41,7 @@ export default BlogPosts
 
 export const query = graphql`
   query BlogPostsPageQuery {
-    allContentfulPost(limit: 1000) {
+    allContentfulPost(limit: 1000, sort: { fields: date, order: DESC }) {
       edges {
         node {
           id
