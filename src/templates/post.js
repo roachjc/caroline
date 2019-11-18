@@ -11,7 +11,20 @@ const Post = ({ data }) => {
       <SEO title={title} />
       <div className="blogpost">
         <h1>{title}</h1>
-        {image && <img alt={title} src={image.file.url} />}
+        {image && (
+          <figure>
+            <img alt={title} src={image.file.url} style={{ marginBottom: 0 }} />
+            <figcaption
+              style={{
+                fontSize: 14,
+                fontStyle: `italic`,
+                fontFamily: `sans-serif`,
+              }}
+            >
+              {image.description}
+            </figcaption>
+          </figure>
+        )}
         <p className="body-text">{documentToReactComponents(text.json)}</p>
         <Link to="/">Back to Home</Link>
       </div>
@@ -33,6 +46,7 @@ export const query = graphql`
         file {
           url
         }
+        description
       }
     }
   }
